@@ -3,8 +3,8 @@
 ## 🐰참여자 
 
 - Yoon JangWon [:octocat:](http://github.com/jangwonyoon) 
-- Min HyeJun [:octocat:](https://github.com/sungjun-jin)  
-- Jin SungJun [:octocat:](https://github.com/alsgpwns)
+- Min HyeJun [:octocat:](https://github.com/alsgpwns)  
+- Jin SungJun [:octocat:](https://github.com/sungjun-jin)
 
 ## 스터디 기록
 
