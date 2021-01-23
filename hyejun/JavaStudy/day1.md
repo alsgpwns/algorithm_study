@@ -12,8 +12,8 @@
   3. HashSet의 Index를 answer배열에 순차적으로 대입한다.
   4.  answer배열을 sort(오름차순 정렬)한다.
 
-    ```java
-    import java.util.*;
+  ```java
+      import java.util.*;
     class Solution {
         public int[] solution(int[] numbers) {
             HashSet<Integer> hs = new HashSet<Integer> ();
@@ -36,7 +36,7 @@
             return answer;
         }
     }
-    ```
+  ```
 
 ### 다른 풀이
 *  내가 사용한 for:each문을 (hashSet의 Index를 배열에 저장하는 코드를)
