@@ -11,8 +11,13 @@
   1. 이중 for문을 이용해 [i]와 [j]를 더한 값을 HashSet에 add한다.
   2. HashSet의 size를 answer배열의 크기로 초기화 한다.
   3. HashSet의 Index를 answer배열에 순차적으로 대입한다.
+<<<<<<< HEAD
+  4.  answer배열을 sort(오름차순 정렬)한다.
+
+=======
   4. answer배열을 sort(오름차순 정렬)한다.
   
+>>>>>>> b838f2827898ed1ba058b14b2afb3589e5bbae3a
   ```java
       import java.util.*;
     class Solution {
