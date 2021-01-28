@@ -1,3 +1,43 @@
+# 문제 2) 약수의 합 
+
+https://programmers.co.kr/learn/courses/30/lessons/12928
+
+
+## 문제 풀이
+
+**약수 구하기** 
+
+자기보다 작은 수로 나뉘는 지 확인한다. 
+
+자기와 나누어 나머지가 0이면 약수이다. 
+
+1. 약수를 구한다.
+2. 구한 약수를 모두 배열에 넣는다.
+3. 배열을 순회하여 모두 더해 반환한다.
+4. 마지막으로 1을 더해준다. 
+    
+```js
+function solution(n) {
+    let arr = [];
+    let result = 0;
+
+    for(let i =1; i <= n; i++ ){
+        arr.push(i)
+    }
+    
+    arr = arr.filter((el)=> n % el === 0)
+    
+    console.log(arr);
+    
+    for(let i = 0; i < arr.length; i++) {
+        result += arr[i]
+    }
+    return result
+}
+``` 
+
+
+
 /*
     문제 이해 
     
@@ -19,34 +59,3 @@
     2. lost 인자를 이용하여 체육복이 없는 학생 배열을 만들어준다. 
     3. reserve를 통해 체육복이 없는 학생에게 보충해준다. 
 */
-
-## 코드
-
-### 아직 다 풀지 못했습니다. 
-
-```js
-function solution(n, lost, reserve) {
-    
-    let student = Array(5).fill(1) ; 
-    let result = 0;
-    
-    for(let i=0; i < lost.length; i++){
-        student[lost[i] - 1] = student[lost[i] - 1] - 1
-    }
-    
-    for(let i=0; i < reserve.length; i++) {
-        if(student[reserve[i]] === 0 ) {
-            student[reserve[i]]++
-        }
-        
-        if(student[reserve[i] + 1] === 0){
-            student[reserve[i] + 1]++
-        }
-    }
-        
-    for(let i= 0; i < student.length; i++) {   
-        result += student[i]
-    }
-    return result
-}
-```
