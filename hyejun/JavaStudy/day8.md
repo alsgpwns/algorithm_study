@@ -125,8 +125,8 @@ import java.util.HashMap;
 class Solution {
     public String solution(String[] participant, String[] completion) {
         String answer="";
-		int value=0;
-		HashMap<String, Integer>hm = new HashMap<String, Integer>();
+	int value=0;
+	HashMap<String, Integer>hm = new HashMap<String, Integer>();
 
 		//넣기
 		for(String p:participant)
@@ -236,36 +236,36 @@ class Solution {
         int[] answer = new int[3];
         ArrayList <Integer> arrList = new ArrayList<Integer>();
         /*첫번째*/
-		int[] 수포자1= {1,2,3,4,5,1,2,3,4,5};
-		int[] 수포자2= {2,1,2,3,2,4,2,5,2,1};
-		int[] 수포자3= {3,3,1,1,2,2,4,4,5,5};
+	int[] 수포자1= {1,2,3,4,5,1,2,3,4,5};
+	int[] 수포자2= {2,1,2,3,2,4,2,5,2,1};
+	int[] 수포자3= {3,3,1,1,2,2,4,4,5,5};
         
         /*두번째*/
-		int[] anwersheet = new int[10];
+	int[] anwersheet = new int[10];
         System.arraycopy(answers, 0, anwersheet, 0, answers.length);
-		System.arraycopy(answers, 0, anwersheet, 5, answers.length);
+	System.arraycopy(answers, 0, anwersheet, 5, answers.length);
         
         /*세번째*/
         for(int i=0; i<5; i++) {
-			if(anwersheet[i]==수포자1[i]) answer[0]+=1;
-			else if(anwersheet[i]==수포자2[i]) answer[1]+=1;
-			else if(anwersheet[i]==수포자3[i]) answer[2]+=1;
-		}
+		if(anwersheet[i]==수포자1[i]) answer[0]+=1;
+		else if(anwersheet[i]==수포자2[i]) answer[1]+=1;
+		else if(anwersheet[i]==수포자3[i]) answer[2]+=1;
+	}
 		
         /*네번째*/
-		int minIndex=0;
-		int maxIndex=1;
-		int middle=2;
-		for(int i=0; i<answer.length; i++) {
-			if(answer[minIndex]>answer[i]) minIndex=i+1;
-			else if(answer[maxIndex]<answer[i]) maxIndex=i+1;
-			else middle =i+1;
-		}
+	int minIndex=0;
+	int maxIndex=1;
+	int middle=2;
+	for(int i=0; i<answer.length; i++) {
+		if(answer[minIndex]>answer[i]) minIndex=i+1;
+		else if(answer[maxIndex]<answer[i]) maxIndex=i+1;
+		else middle =i+1;
+	}
 
         /*다섯번째*/
-		if(answer[0]!=0) arrList.add(maxIndex);
-		if(answer[1]!=0) arrList.add(middle);
-		if(answer[2]!=0) arrList.add(minIndex);
+	if(answer[0]!=0) arrList.add(maxIndex);
+	if(answer[1]!=0) arrList.add(middle);
+	if(answer[2]!=0) arrList.add(minIndex);
         
         return arrList;
     }
