@@ -25,7 +25,6 @@ https://programmers.co.kr/learn/courses/30/lessons/12969
 https://programmers.co.kr/learn/courses/30/lessons/12934
 
 **문제5**
+### 최대공약수와 최소공배수
 
-### 최대공약수와 최소 공배수
-
-https://programmers.co.kr/learn/courses/30/lessons/12940
+https://programmers.co.kr/learn/courses/30/lessons/12940?language=javascript
