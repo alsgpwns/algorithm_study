@@ -1,30 +1,20 @@
+**문제풀이 -> 비트연산자**
+
+1) 2진수로 바꾸어준다.
+2) 비트연산을 사용하여 이진수를 바꿔준다. (요소를 숫자로 바꿔준다)
+3) 바꿔준 비트연산 앞에 0을 넣어준다. 
+4) 뒤로 배열의 col만큼 얕은 복사를 진행한다.
+5) replace함수를 사용하여 원하는 값으로 치환한다. 
+
 ```js
 function solution(n, arr1, arr2) {
-    let firstArr = arr1.map((el)=>el.toString(2)).map((el)=> +el);
-    let secondArr = arr2.map((el)=>el.toString(2)).map((el)=>+el);
+    let arr =  arr1.map((el,i)=> ('0'.repeat(n) + (el | arr2[i]).toString(2)).slice(-n));
     
-    let result = [];
-    
-    for(let i=0; i<firstArr.length; i++) {
-        result.push(firstArr[i] + secondArr[i]);
-    }
-    
-    result = result.map((el)=>(el+"").split(""))
-    
-     result.map((el)=> el.map((ele)=>{
-        console.log(ele === "1" ? true :false)
-    }))
+    return arr.map((el)=> el.replace(/0/g , " ").replace(/1/g,"#"));
 }
-
-/*
-    문제풀이
-    1) 2진수로 바꾸어준다.
-    2) 각 요소를 더해준다. (요소를 숫자로 바꿔준다)
-    3) 만약 2의 값이 나온다면 1로 바꿔준다. 
-    4) 각 요소를 순회햐여 1이라면 #으로 바꿔준다.
-    5) 만약 0이라면 공백으로 치환한다.
-    6) 배열을 반환한다. 
-    
-
-*/
 ```
+
+### 레퍼런스
+* https://velog.io/@jakeseo_me/2019-04-30-1604-%EC%9E%91%EC%84%B1%EB%90%A8-7qjv3gv9ad
+  
+*  https://tech.kakao.com/2017/09/27/kakao-blind-recruitment-round-1/
