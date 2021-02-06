@@ -29,6 +29,21 @@
 https://programmers.co.kr/learn/courses/30/lessons/42862
 ## 코드
 
+
+### 정답 풀이
+
+```js
+function solution(n, lost, reserve) {
+    let lostArr = lost.slice().sort((a,b)=>b-a);
+    let reserveArr = reserve.slice().sort((a,b)=>b-a)
+    
+    return n - lostArr.filter((lost)=> {
+        let service = reserveArr.find((reserver) => Math.abs(reserver - lost) <=1);
+        if(!service) return true
+        reserveArr = reserveArr.filter((el) => el !== service);
+    }).length;
+}
+```
 ### 테스트 케이스만 통과 ,아직 다 풀지 못했습니다. 
 
 ```js
@@ -55,5 +70,23 @@ function solution(n, lost, reserve) {
         result += student[i]
     }
     return result
+}
+```
+
+
+```js
+function solution(n, lost, reserve) {
+  
+    for(let i=0; i < lost.length; i++) {
+        for(let j=0; j< reserve.length; j++) {
+            if(lost[i] === reserve[j] + 1 || lost[i] === reserve[j] - 1 ){
+                const idx = lost.indexOf(lost[i])
+                lost.splice(idx,1);
+            }
+        }
+    }
+    
+    return n - lost.length;
+    
 }
 ```
