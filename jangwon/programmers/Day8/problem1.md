@@ -1,3 +1,9 @@
+**문제1**
+
+### 두 개 뽑아서 더하기 
+
+https://programmers.co.kr/learn/courses/30/lessons/68644
+
 ```js
 function solution(numbers) {
     let arr = numbers;
