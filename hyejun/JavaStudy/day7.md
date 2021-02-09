@@ -1,331 +1,214 @@
-# Day7 [Level1]
+# Day10 [Level]
 ### 문제1
-![image](https://user-images.githubusercontent.com/45223821/106389347-33787800-6426-11eb-800d-c6de9fa7fe10.png)
-- <https://programmers.co.kr/learn/courses/30/lessons/12926>
-- 유형: 문자열, 아스키코드
+![image](https://user-images.githubusercontent.com/45223821/106856671-30210d00-6702-11eb-8187-32d80747f2fc.png)
+
+
+<https://programmers.co.kr/learn/courses/30/lessons/12947>
 
 ### 문제 설명
-매개변수로 문자열s, 정수 n을 받는다.
+자연수 x를 입력받아 x가 하샤드 수 인지 검사한다.
 
+자연수 x의 일의 자리부터 n의 자리까지 더해, 본래의 값이 더한값으로 나누어 떨어진다면 하샤드 수이다.
 
-s를 n만큼 더해준 '시저 암호'를 만드는 문제이다.
+ex) 10
 
+1+0 => 1
 
-이를 위해 아스키코드를 사용했다.
-
-
-### 입출력 예
-![image](https://user-images.githubusercontent.com/45223821/106389351-35dad200-6426-11eb-9fbc-b62f46443fc2.png)
+10/1 => 나누어 떨어지므로 하샤드수
 
 ### 풀이
-- 매개변수로 받은 s의 상태는 아래와 같이 두개로 나뉜다.
+1. 매개변수 x를 받아 while문을 돌며 x를 일의자리부터 n의 자리까지 더해, 변수 sum에 담는다
 
-1. null (공백) 일 때
-
-2. 소문자 or 대문자 일 때
-
-​
-
-- 더한 후 문자의 상태
-
-1. null (공백은 어떤 숫자를 더해도 공백이다.)
-
-2. 더한 후 소문자or대문자의 범위를 넘어갈 떄 ( z+1 = a)
-
-3. 더한 후 일반적인 상태일 때 ( AB+1 = BC)
-
-​
-
-- 생각한 알고리즘
-
-1. null 일 떄
-    - answer에 null을 넣어준다.
-
-​
-
-1. 더한 후 범위를 넘어갈 때
-
-    - 더한 후 범위를 넘어가도, 다시 a로 돌아올 수 있도록, 아스키코드로 -26을 해준다.
-
-​
-
-3. 더한 후 일반적인 상태일 때
-
-    - +n (그냥 더해준다)
-
-
-
+2. 매개변수 x(변수 temp)를 sum으로 나누어떨어진다면 true, 아니라면 false를 반환한다.
 ```java
 class Solution {
-    public String solution(String s, int n) {
-        String answer = "";
-        for(int i=0; i<s.length(); i++) {	
-			char ch=s.charAt(i);
-			if(ch==' ') {  /*첫번째 상태*/
-				answer+=(char)ch;
-			} else if('a'<=ch && ch<='z' && ch+n>'z' || 'A'<=ch && ch<='Z' && ch+n >'Z') {  /*두번째 상태*/
-				int ask= (ch+n-26);
-				answer+=(char)ask;
-			}  else {  /*세번째 상태*/
-				int ask=ch+n;
-				answer+=(char)ask;
-			}
-			
+    public boolean solution(int x) {
+        int sum=0;
+        int temp=x;
+
+        while(x>0) {
+			sum += x%10;
+			x=x/10;
 		}
-        return answer;
+        return (temp%sum==0)? true: false;
     }
 }
-
 ```
-
-[10진수 → 아스키코드 ]
-
-아스키코드로 변환후, 숫자가 출력돼서 당황했는데,
-
-char형으로 변환해주면, 문자가 출력된다.
-  ```java
-  char ch=s.charAt(i);
-answer+=(char)ask;
-  ```
-
-  ※ 아스키코드를 사용한 비슷한 문제
-
-<https://blog.naver.com/5550304/222043306872>
 ### 다른 풀이
+1. split와 String.valueOf메소드를 이용해, String 배열 초기화
+
+2. 변수 sum에 s를 더해준다
+
+3. x가 sum으로 나누어 떨어진다면 true 반환, 아니라면 false반환
 ```java
 class Solution {
-	public String solution(String s, int n) {
-		String answer = "";
-		n = n % 26;
-		for (int i = 0; i < s.length(); i++) {
-			char ch = s.charAt(i);
-			if (Character.isLowerCase(ch)) {
-				ch = (char) ((ch - 'a' + n) % 26 + 'a');
-			} else if (Character.isUpperCase(ch)) {
-				ch = (char) ((ch - 'A' + n) % 26 + 'A');
-			}
-			answer += ch;
+    public boolean solution(int x) {
+        String[] temp = String.valueOf(x).split("");
+		int sum = 0;
+		for (String s : temp) {
+			sum += Integer.parseInt(s);
 		}
-		System.out.println(answer);
-		return answer;
-	}
+		
+		return (x%sum==0)? true: false;
+    }
 }
 ```
-
-- isUpperCase()
-    
-    isUpperCase메소드를 이용해 받은 인자가 영문 대문자/소문자 여부를 판단해 true 혹은 false값을 리턴해준다.
-
-```java
-Character.isUpperCase(ch)
-```
-
 ---
 ### 문제2
-![image](https://user-images.githubusercontent.com/45223821/106389524-fb256980-6426-11eb-868c-f5f60e1562fe.png)
-
-<https://programmers.co.kr/learn/courses/30/lessons/12935>
-
-### 문제 설명
-배열 arr에서 가장 작은 수를 제거한 배열 answer를 return한다.
-
-### 입출력 예
-![image](https://user-images.githubusercontent.com/45223821/106389525-fd87c380-6426-11eb-87b2-dfe21b59aff5.png)
-
-### 풀이
-1. 이중 for문을 이용해 가장 작은 값 (min)을 찾는다.
-
-2. arr의 요소(values)가 min과 같지 않다면, answer배열에 arr 요소(values)를 넣어준다.
-
-3. answer배열 return
-
-   - 문제 요구사항엔 배열이 빈 경우, 배열에 -1을 return하라고 명시되어있다. 하지만 테스트케이스엔 없는것같아 삭제했다. (근데 넣어야될것같다.)
-
-```java
-class Solution {
-    public int[] solution(int[] arr) {
-         int[] answer = new int[arr.length-1];
-         int count=0;
-        
-        // min 찾기
-        int min = arr[0];
-        for(int i=0; i<arr.length-1; i++) {
-        	for(int j=i+1; j<arr.length; j++) {
-        		int temp = Math.min(arr[i], arr[j]);
-        		if(min>temp) min=temp;
-        	}
-        }
-        
-        for(int i=0; i<arr.length; i++) {
-        	if(! (arr[i]==min)) answer[count++]=arr[i];
-        }
-        
-        return answer;
-    }
-}
-```
-### 다른 풀이
-1. 비슷한 풀이
-
-    - for문과 if문을 이용해 최소값 (minIndex)를 찾는다. 
-
-        → index 번호
-
-    - minIdex를 삭제하기 위해, minIdex보다 한칸 뒤의 Index부터 (minindex+1) arr에 넣어준다.
-    
-        → min값을 제거한 arr을 만듦
 
 
-    - answer array에 min값을 제거한 arr을 넣어준다.
-    
-    ```java
-    class Solution{
-        public int[] solution(int[] arr) {
-            /*첫번 째*/
-            if (arr.length == 1) {
-                arr[0] = -1;
-                return arr;
-            } 
-            
-            int[] answer = new int[arr.length-1];
-            int minIndex=0;
-
-            /*두번 째*/
-            for(int i=0; i<arr.length; i++){
-                if(arr[minIndex]>arr[i]){
-                    minIndex = i;
-                }
-            }
-
-            /*세번 째*/
-            for(int i=minIndex+1; i<arr.length; i++){
-                arr[i-1] = arr[i];
-            }
-            
-            /*네번 째*/
-            for(int i=0; i<answer.length; i++){
-                answer[i] = arr[i];
-            }
-            
-            
-            return answer;
-        }
-    }
-    ```
-    - 나는 최소값을 이중for문으로 찾았는데, 아래와 같이 for문과 if문을 사용해 for문 하나로도 구현할 수 있다.
-    ```java
-            /*두번 째*/
-            for(int i=0; i<arr.length; i++){
-                if(arr[minIndex]>arr[i]){
-                    minIndex = i;
-                }
-            }
-
-    ```
-
-2. ArrayList를 사용한 풀이
-   - ArrayList를 생성한다.
-
-   - 생성된 ArrayList에 arr배열의 값을 넣어준다.
-
-   - Collections.min 메소드를 사용해, 가장 작은 값을 min 변수에 대입한다.
-
-   - ArrayLisy.remove 메소드를 사용해, ArrayList에 저장되어있는 min(가장 작은 값)을 삭제한다.
-
-   - ArrayList에 저장되어있는 값을 answer배열에 대입한다.
-
-   - answer 배열 return
-        ```java
-        class Solution{
-        public int[] solution(int[] arr) {
-            int[] answer = new int[arr.length-1];
-            
-            if (arr.length == 1) {
-                arr[0] = -1;
-                return arr;
-            } 
-            
-            ArrayList<Integer> list= new ArrayList<Integer>();
-            for (int a : arr) {
-                list.add(a);
-            }
-            
-            Integer min= Collections.min(list);
-            list.remove(min);
-
-            for (int i = 0; i < list.size(); i++) {
-                answer[i] = list.get(i);
-            }
-            
-            return answer;
-            }
-        }
-        ```
-    - Collections.max() , Collections.min() 메소드
-
-        지정된 컬렉션의 가장 큰 요소/ 가장 작은 요소를 반환한다.
-        ```java
-        Integer[] list = { 1123, 1412, 23, 44, 512132 };
-        List<Integer> arr = new ArrayList<>(Arrays.asList(list));
-
-        System.out.println(Collections.max(arr)); // 512132
-        System.out.println(Collections.min(arr)); // 23
-        ```
-
----
-### 문제3
-![image](https://user-images.githubusercontent.com/45223821/106389638-b9e18980-6427-11eb-948d-117ef45eecb2.png)
-
-<https://programmers.co.kr/learn/courses/30/lessons/12931>
+<https://programmers.co.kr/learn/courses/30/lessons/12969>
 
 ### 문제 설명
-자연수 n의  각 자릿수의 합을 구해 return한다.
+입력받은 가로, 세로의 길이로 직사각형 형태의 별찍기를 해준다.
 
-### 입출력 예
-
-![image](https://user-images.githubusercontent.com/45223821/106389641-bd751080-6427-11eb-915f-ae170ffb6de6.png)
 
 ### 풀이
 간단하다.
 
-​
-int n을 String형으로 형변환 해준 뒤,
-
-charAt메소드를 이용해 모든 원소를 더해준다.
-
-더한 값을 answer에 넣고, return한다.
-
+별의 세로 갯수는 이중 FOR문의 밖,가로 갯수는 이중 FOR문의 안으로 찍어주면 된다.
 ```java
+import java.util.Scanner;
+
 public class Solution {
-    public int solution(int n) {
-        int answer = 0;
-        String str=Integer.toString(n);
-       
-       for(int i=0; i<str.length(); i++) {
-    	   answer+=str.charAt(i)-48;
-       }
-        return answer;
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+
+         for(int i=0; i<b; i++) {
+        	for(int j=0; j<a; j++) {
+        		System.out.print("*");
+        	}
+        	System.out.println();
+        }
+    }
+}
+```
+
+---
+### 문제3
+<https://programmers.co.kr/learn/courses/30/lessons/12934>
+
+### 문제 설명
+문제 이름 그대로, 매개변수 n의 정수 제곱근을 판단한다.
+
+ex) 121 -> 11의 제곱근 이므로, n+1의 제곱근을 return
+
+ex) 3 -> 1.xxxx의 제곱근 이므로, -1을 return
+
+
+### 풀이
+1. Math.sqrt메소드를 이용해, 매개변수 n의 제곱근을 구한다.
+
+2. 제곱근이 정수인지 판단하기 위해, dobule type의 제곱근과 int type의 제곱근을 비교한다.
+
+    ( 3 -> double: 1.xxxx / int : 1 )
+
+3. int 제곱근과 double 제곱근이 같다면, n+1의 제곱근을 return, 다르다면, -1을 return
+```java
+import java.util.*;
+class Solution {
+    public long solution(long n) {
+        double result = Math.sqrt(n);      
+        return (long) (((int)result==result)? (result+1)*(result+1): -1);
     }
 }
 ```
 ### 다른 풀이
-
-- 타입변환 없이 풀 수 있는 코드
-
-  1. n%10을 이용해, 일의 자리부터 구해서, answer에 더해준다.
-
-  2. n/ 10을 이용해, n의 자리수를 하나씩 감소시킨다.
-
+- 로직이 같은 풀이
     ```java
-    public class Solution {
-        public int solution(int n) {
-            int answer = 0;
-            while(n>0){
-                answer+=n%10;
-                n=n/10;
+    class Solution {
+    public long solution(long n) {
+        if (Math.pow((int)Math.sqrt(n), 2) == n) {
+                return (long) Math.pow(Math.sqrt(n) + 1, 2);
             }
-            return answer;
-        }
+            return -1;
+    }
     }
     ```
+- Math.floor를 이용한 풀이
+
+    나는 type변환을 이용했는데, 이 풀이는 floor(버림)을 이용해서 풀었다.
+    ```java
+    class Solution {
+    public long solution(long n) {
+
+        double i = Math.sqrt(n);
+
+        return Math.floor(i) == i ? (long) Math.pow(i + 1, 2) : -1;
+    }
+    }
+    ```
+
+---
+### 문제4 [In progress]
+최대공약수와 최소공배수
+
+### 문제 설명
+매개변수의 최대공약수와 최소 공배수를 구해서 return
+
+### 풀이
+- 우선 구현해보고 리팩토링 할 예정
+```java
+import java.util.*;
+class Solution {
+    public int[] solution(int n, int m) {
+       int[] answer = {1,1};
+        ArrayList <Integer> min = new ArrayList<Integer>(); //최소공배수
+        ArrayList <Integer> max_n = new ArrayList<Integer>(); //최대공약수
+        ArrayList <Integer> max_m = new ArrayList<Integer>(); //최대공약수      
+        int a=n;
+        int b=m;
+         //최소공배수
+        while(n>=1) {
+        	if(n%2==0 && m%2==0) {
+        		n=n/2;
+        		m=m/2;
+        		min.add(2);
+        		min.add(n);
+        		min.add(m);
+        	}
+        	else if(n%3==0 && m%3==0) {
+        		n=n/3;
+        		m=m/3;
+        		min.add(3);
+        		min.add(n);
+        		min.add(m);
+        	}
+        	else break;
+        }
+        if(min.size()==0) {
+        	min.add(n);
+        	min.add(m);
+        }
+        for(int i=0; i<min.size(); i++) {
+        	answer[1]=answer[1]*min.get(i);
+        }
+        
+        //최대 공약수
+        while(a>=1 && b>=1) {
+        	max_n.add(a);
+        	max_m.add(b);
+        	if(a%2==0) a=a/2;
+        	else if(a%3==0) a=a/3;
+        	if(b%2==0) b=b/2;
+        	else if(b%3==0) b=b/3;
+        	else break;
+        }
+         if(min.size()==2) {
+        	answer[0]=1;
+        }
+        else
+        for(int i=0; i<max_n.size()-1; i++) {
+        	if( max_m.contains(max_n.get(i)) ) answer[0]=answer[0]*max_n.get(i);
+        }
+         return answer;
+    }
+}
+```
+
+---
+### 문제5 [In progress]
+2016 
 
