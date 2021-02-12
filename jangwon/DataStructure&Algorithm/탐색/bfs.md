@@ -49,6 +49,12 @@
 ### 그래프 BFS 알고리즘 구현
 
 * 두 개의 큐(Queue)를 활용합니다.
+
+1. 방문이 필요한 큐를 생성 , 방문한 큐를 생성
+2. 방문이 필요한 큐에서 요소를 빼고
+3. while 반복문 needVisit의 길이가 0일때까지로 만듬
+4. needVisit와 인접한 노드를 방문확인
+5. 방문한 상태가 아니면 needvisit 큐에 담아준다.
   
 ```js
 
@@ -64,7 +70,6 @@ const graph = {
   I: ['C', 'J'],
   J: ['I']
 };
-
 
 const bfs = (graph,startNode) => {
   let visited = []; // 탐색을 마친 노드들 

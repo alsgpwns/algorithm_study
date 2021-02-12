@@ -16,5 +16,67 @@
 **팁**
 
 * 프로그래밍 대회에서 스택을 구현하는 것이 아닌 **재귀로** 푸는것이 더 많이 활용이 됩니다.
+
 --- 
 
+## Pseudocode 
+
+```js
+
+function search(Node root) {
+  if(root === null) return;
+
+  // 1. root 노드 방문
+  visit(root);
+  root.visited = true; // 방문 노드 표시 
+
+  // 2. root 노드와 인접한 정점을 모두 방문
+
+  forEach(Node n in root.adjacent) {
+
+    // 4. 방문하지 않은 정점을 찾는다. 
+    if(n.visited === false){
+      search(n) // 3. root 노드와 인접한 정점을 시작 정점으로 DFS를 시작
+    } 
+  }
+}
+
+```
+
+
+### Recursion DFS
+
+```js
+
+function dfs(root) {
+  if(root === null) return [];
+  return [...dfs(root.left), root.val, ...dfs(root.right)];
+}
+
+```
+
+### Stack DFS
+
+```js
+
+function dfs(root) {
+  let stack = [];
+  let ret = [];
+  let node  = root;
+
+  while(node || stack.length) {
+
+    // 스택에 값 넣기 
+    while(node !== null) {
+      stack.push(node);
+      node = node.left;
+    }
+
+    node = stack.pop();
+    ret.push(node.val);
+    node = node.right;
+  }
+  return ret;
+}
+
+```
