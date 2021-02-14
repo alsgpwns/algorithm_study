@@ -6,7 +6,7 @@
 
 ```jsx
 let values = [3, 1, 3, 5, 2, 4, 4, 4];
-let uniqueValues = [...new Set(values)];
+let uniqueValues = [...ne Set(values)];
 // uniqueValues is [3, 1, 5, 2, 4]
 ```
 
