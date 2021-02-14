@@ -17,3 +17,33 @@ function solution(participant, completion) {
     }
 }
 ```
+
+```js
+function solution(participant, completion) {
+    const hash = new Map();
+    
+    for(let el of participant) {
+        if(!hash.has(el)){
+            hash.set(el,1);
+        }else{
+            hash.set(el,hash.get(el) + 1);
+        }
+    }
+    
+    completion.map((el)=>{
+        if(hash.has(el)){
+            hash.set(el,hash.get(el)-1);
+        }
+    })
+    
+   for(let el of participant) {
+       if(hash.get(el) > 0) {
+           return el
+       }
+   }
+}
+```
+
+```js
+
+```
