@@ -12,9 +12,7 @@
 
 ```js
 function countingSort() {
-  let temp;
   let count = [];
-  let result = [];
   let arr = [1,3,4,5,1,3,5,2,2,3,4,1,3,4,5,1,4,5,5,5,5,1,1];
 
   for(let i=0; i< 5; i++) {
@@ -22,6 +20,8 @@ function countingSort() {
   }
 
   for(let i=0; i < arr.length; i++ ) {
+    
+    // arr[i]의 값이 1이면 countArr의 인덱스는 0이기 때문에  -1을 해줘 카운팅한다.
     count[arr[i]-1]++
   }
   for(let i=0; i< 5; i++) {
