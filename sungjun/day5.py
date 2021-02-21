@@ -29,3 +29,45 @@ def get_participant(participant, completion):
     failed_participant = participant_count_dict - completion_count_dict
 
     return list(failed_participant.keys())[0]
+
+
+def exhaustive_search():
+    """
+    완전탐색 (Exhaustive Search)
+
+    [문제 설명]
+    수포자는 수학을 포기한 사람의 준말입니다. 수포자 삼인방은 모의고사에 수학 문제를 전부 찍으려 합니다. 수포자는 1번 문제부터 마지막 문제까지 다음과 같이 찍습니다.
+
+    1번 수포자가 찍는 방식: 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, ...
+    2번 수포자가 찍는 방식: 2, 1, 2, 3, 2, 4, 2, 5, 2, 1, 2, 3, 2, 4, 2, 5, ...
+    3번 수포자가 찍는 방식: 3, 3, 1, 1, 2, 2, 4, 4, 5, 5, 3, 3, 1, 1, 2, 2, 4, 4, 5, 5, ...
+
+    1번 문제부터 마지막 문제까지의 정답이 순서대로 들은 배열 answers가 주어졌을 때, 가장 많은 문제를 맞힌 사람이 누구인지 배열에 담아 return 하도록 solution 함수를 작성해주세요.
+    """
+    student_index_list = list()
+    student_1 = [1, 2, 3, 4, 5]
+    student_2 = [2, 1, 2, 3, 2, 4, 2, 5]
+    student_3 = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5]
+
+    # 학생 별 정답 카운트
+    answer_count = [0, 0, 0]
+
+    for idx, answer in enumerate(answers):
+        if answer == student_1[idx % len(student_1)]:
+            answer_count[0] += 1
+
+        if answer == student_2[idx % len(student_2)]:
+            answer_count[1] += 1
+
+        if answer == student_3[idx % len(student_3)]:
+            answer_count[2] += 1
+    # 최다 정답 개수
+    max_answer_count = max(answer_count)
+
+    # 최다 정답 개수와 같으면 학생 번호를 student_index_list에 추가
+    for student, a in enumerate(answer_count):
+        if max_answer_count == a:
+            student_index_list.append(student + 1)
+
+    return student_index_list
+
