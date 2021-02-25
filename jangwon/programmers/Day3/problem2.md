@@ -44,6 +44,7 @@ function solution(n, lost, reserve) {
     }).length;
 }
 ```
+
 ### 테스트 케이스만 통과 ,아직 다 풀지 못했습니다. 
 
 ```js
