@@ -4,7 +4,7 @@
 
 ### https://leetcode.com/explore/learn/card/linked-list/214/two-pointer-technique/1212/
 
-* 풀이 
+* 풀이 1 (해시 이용)
 
 ```js
 var hasCycle = function(head) {
@@ -21,19 +21,40 @@ var hasCycle = function(head) {
 };
 ```
 
+* 풀이 2 Two Pointer (Floyd's Cycle Finding Algorithm)
+
 ```js
-var hasCycle = (head) => {
-    let p1 = head;
-    let p2 = head;
+var hasCycle = function(head) {
+    let slow = head;
+    let fast = head;
     
-    while(p2 && p2.next && p2.next.next) {
-        p1 = p1.next;
-        p2 = p2.next.next;
-        
-        if(p1 === p2) {
-            return true;
+    while(fast && fast.next && fast.next.next) {
+        slow = slow.next;
+        fast = fast.next.next;
+        if(slow === fast) return true;
+    }
+    return false;
+};
+```
+
+* 풀이 3 
+
+```js
+var hasCycle = function(head) {
+    if(head === null){
+        return false;
+    }
+    
+    let slow = head;
+    let fast = head.next;
+    
+    while(slow !== fast) {
+        if(fast === null || fast.next === null){
+            return false;
         }
-    }   
-    return false;   
-}
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+    return true;
+};
 ```
