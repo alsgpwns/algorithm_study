@@ -1,4 +1,3 @@
-=====
 # Day15 [Leve2/greedy]
 ### 문제1
 ![image](https://user-images.githubusercontent.com/45223821/109821851-bedd6700-7c79-11eb-8801-f5d69830c203.png)
